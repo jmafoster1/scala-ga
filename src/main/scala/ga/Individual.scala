@@ -21,5 +21,7 @@ class Individual[A](r: A) extends Ordered[Individual[A]]{
     return compare_lists(this.fitness, that.fitness)
   }
   
+  override def toString() = rep.toString()+ ": " + fitness
+  
 }
 

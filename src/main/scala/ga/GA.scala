@@ -4,9 +4,9 @@ import scala.util.Random
 
 abstract class GA[A <% Individual[_] with Ordered[A]](
     rand: Random,
-    optimal: List[Double],
-    lambda: Integer,
+    optimal: Double,
     mu: Integer,
+    lambda: Integer,
     gen: Generator[A],
     sel: SelectionFunction[A],
     cross: CrossoverFunction[A],
@@ -22,10 +22,10 @@ abstract class GA[A <% Individual[_] with Ordered[A]](
 
   def iterate(numGens: Integer): A = {
     for (i <- 0 to numGens) {
-      population.find(i => i.compare_lists(i.fitness, optimal) >= 0) match {
-        case Some(i) => return i
-        case None => {}
-      }
+      val best = population.min
+      println(best)
+      if (best.fitness.head <= optimal)
+          return best
 
       val offspring = (0 to lambda - 1).map(x => crossover()).map(x => cross.mutate(x))
       for (i <- offspring)

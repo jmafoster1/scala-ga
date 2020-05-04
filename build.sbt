@@ -17,6 +17,8 @@ mainClass in assembly := Some("FrontEnd")
 lazy val root = (project in file("."))
   .settings(
     name := "scala-ga",
+    libraryDependencies += "org.apache.commons" % "commons-collections4" % "4.1",
+    
   )
 
 // Uncomment the following for publishing to Sonatype.
