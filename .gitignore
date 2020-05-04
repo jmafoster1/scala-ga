@@ -1,0 +1,10 @@
+# Ignore Scala class files
+*.class
+
+# Ignore platform specific sbt stuff
+project/target/
+project/project
+target/
+
+bin/
+.cache-main
