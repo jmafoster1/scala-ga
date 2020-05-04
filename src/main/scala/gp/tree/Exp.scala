@@ -35,23 +35,23 @@ object Exp {
     def varsInTree = Set(a)
     override def toString() = a.toString()
   }
-  final case class Plus(a: exp[Int], b: exp[Int]) extends exp[Int] {
-    def eval(c: Context): Int = a.eval(c) + b.eval(c)
+  final case class Plus(a: exp[Long], b: exp[Long]) extends exp[Long] {
+    def eval(c: Context): Long = a.eval(c) + b.eval(c)
     def height = Math.max(a.height, b.height)
     def varsInTree = a.varsInTree().union(b.varsInTree())
-    override def toString() = f"$a + $b"
+    override def toString() = f"($a + $b)"
   }
-  final case class Minus[A](a: exp[Int], b: exp[Int]) extends exp[Int] {
-    def eval(c: Context): Int = a.eval(c) - b.eval(c)
+  final case class Minus[A](a: exp[Long], b: exp[Long]) extends exp[Long] {
+    def eval(c: Context): Long = a.eval(c) - b.eval(c)
     def height = Math.max(a.height, b.height)
     def varsInTree = a.varsInTree().union(b.varsInTree())
-    override def toString() = f"$a - $b"
+    override def toString() = f"($a - $b)"
   }
-  final case class Times[A](a: exp[Int], b: exp[Int]) extends exp[Int] {
-    def eval(c: Context): Int = a.eval(c) * b.eval(c)
+  final case class Times[A](a: exp[Long], b: exp[Long]) extends exp[Long] {
+    def eval(c: Context): Long = a.eval(c) * b.eval(c)
     def height = Math.max(a.height, b.height)
     def varsInTree = a.varsInTree().union(b.varsInTree())
-    override def toString() = f"$a * $b"
+    override def toString() = f"($a * $b)"
   }
   final case class Bc[A](a: Boolean) extends exp[Boolean] {
     def eval(c: Context) = a

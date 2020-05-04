@@ -3,12 +3,12 @@ package gp.tree
 import org.apache.commons.collections4.MultiValuedMap
 import scala.collection.JavaConversions._
 
-abstract class ExpFitness[A](evalSet: MultiValuedMap[List[(Exp.vname, Object)],A], latentVals: List[A]) extends ga.FitnessFunction[ga.Individual[Exp.exp[A]]] {
+abstract class ExpFitness[A](evalSet: MultiValuedMap[List[(Exp.vname, Object)], A], latentVals: List[A]) extends ga.FitnessFunction[ga.Individual[Exp.exp[A]]] {
   def distance(expected: A, actual: A): Double
 
   def totalUsedVars() = Set[Exp.vname]()
 
-  def calculateDistance(current: java.util.Map.Entry[List[(Exp.vname, Object)],A], latent: Set[Exp.vname]): Double = {
+  def calculateDistance(current: java.util.Map.Entry[List[(Exp.vname, Object)], A], latent: Set[Exp.vname]): Double = {
     return 0
   }
 
@@ -32,11 +32,11 @@ abstract class ExpFitness[A](evalSet: MultiValuedMap[List[(Exp.vname, Object)],A
   }
 }
 
-class IntExpFitness(e: MultiValuedMap[List[(Exp.vname, Object)],Int], l: List[Int]) extends ExpFitness[Int](e, l) {
-  def distance(expected: Int, actual: Int) = Math.abs(expected - actual)
+class IntExpFitness(e: MultiValuedMap[List[(Exp.vname, Object)], Long], l: List[Long]) extends ExpFitness[Long](e, l) {
+  def distance(expected: Long, actual: Long) = Math.abs(expected - actual)
 }
 
-class StrExpFitness(e: MultiValuedMap[List[(Exp.vname, Object)],String], l: List[String]) extends ExpFitness[String](e, l) {
+class StrExpFitness(e: MultiValuedMap[List[(Exp.vname, Object)], String], l: List[String]) extends ExpFitness[String](e, l) {
 
   // From Rosetta Code: https://rosettacode.org/wiki/Levenshtein_distance#Scala
   def distance(s1: String, s2: String): Double = {
@@ -56,7 +56,7 @@ class StrExpFitness(e: MultiValuedMap[List[(Exp.vname, Object)],String], l: List
   }
 }
 
-class BoolExpFitness(e: MultiValuedMap[List[(Exp.vname, Object)],Boolean]) extends ExpFitness[Boolean](e, List(true, false)) {
+class BoolExpFitness(e: MultiValuedMap[List[(Exp.vname, Object)], Boolean]) extends ExpFitness[Boolean](e, List(true, false)) {
 
   def distance(expected: Boolean, actual: Boolean): Double = {
     if (actual == expected) 0 else 1

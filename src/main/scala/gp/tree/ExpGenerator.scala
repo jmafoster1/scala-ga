@@ -2,11 +2,11 @@ package gp.tree
 
 import scala.util.Random
 
-class IntExpGenerator(size: Int, vars: List[Exp.vname], vs: List[Int], rand: Random) extends ga.Generator[ga.Individual[Exp.exp[Int]]](rand) {
+class IntExpGenerator(size: Int, vars: List[Exp.vname], vs: List[Long], rand: Random) extends ga.Generator[ga.Individual[Exp.exp[Long]]](rand) {
 
-  val vals = (vs ++ List(0, 1, 2)).distinct
+  val vals = (vs ++ List(0l, 1l, 2l)).distinct
   
-  def randomTerminal(): Exp.exp[Int] = {
+  def randomTerminal(): Exp.exp[Long] = {
     if (rand.nextBoolean() && !vars.isEmpty) {
       Exp.V(rand.shuffle(vars).head)
     }
@@ -15,7 +15,7 @@ class IntExpGenerator(size: Int, vars: List[Exp.vname], vs: List[Int], rand: Ran
     }
   }
 
-  def generateExpression(s: Int): Exp.exp[Int] = {
+  def generateExpression(s: Int): Exp.exp[Long] = {
     if (rand.nextDouble() > 0.8 || s < 2) {
       return randomTerminal()
     } else {
@@ -27,7 +27,7 @@ class IntExpGenerator(size: Int, vars: List[Exp.vname], vs: List[Int], rand: Ran
     }
   }
 
-  def generate(): ga.Individual[Exp.exp[Int]] = {
+  def generate(): ga.Individual[Exp.exp[Long]] = {
     return new ga.Individual(generateExpression(size))
   }
 }
@@ -50,7 +50,7 @@ class StrExpGenerator(size: Int, vars: List[Exp.vname], vs: List[String], rand: 
   }
 }
 
-class BoolExpGenerator(size: Int, intVars: List[Exp.vname], intVals: List[Int], strVars: List[Exp.vname], strVals: List[String], rand: Random) extends ga.Generator[ga.Individual[Exp.exp[Boolean]]](rand) {
+class BoolExpGenerator(size: Int, intVars: List[Exp.vname], intVals: List[Long], strVars: List[Exp.vname], strVals: List[String], rand: Random) extends ga.Generator[ga.Individual[Exp.exp[Boolean]]](rand) {
 
   val intGen = new IntExpGenerator(size, intVars, intVals, rand)
   val strGen = new StrExpGenerator(size, strVars, strVals, rand)
