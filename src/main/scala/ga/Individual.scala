@@ -1,6 +1,6 @@
 package ga
 
-class Individual {
+class Individual[A](rep: A) {
   
   var fitness: List[Double] = null
   
@@ -16,7 +16,7 @@ class Individual {
     }
   }
   
-  def compare(that: Individual): Int = {
+  def compare(that: Individual[A]): Int = {
     return compare_lists(this.fitness, that.fitness)
   }
   

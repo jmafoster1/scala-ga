@@ -2,7 +2,7 @@ package ga
 
 import scala.util.Random
 
-abstract class GA[A <% Individual with Ordered[A]](
+abstract class GA[A <% Individual[_] with Ordered[A]](
     rand: Random,
     optimal: List[Double],
     lambda: Integer,
