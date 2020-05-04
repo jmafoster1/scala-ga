@@ -1,8 +1,9 @@
 package ga
 
-class Individual[A](rep: A) {
+class Individual[A](r: A) extends Ordered[Individual[A]]{
   
   var fitness: List[Double] = null
+  val rep = r
   
   def compare_lists(l1: List[Double], l2: List[Double]): Int = (l1, l2) match {
     case (Nil, Nil) => 0
@@ -21,3 +22,4 @@ class Individual[A](rep: A) {
   }
   
 }
+
